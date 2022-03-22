@@ -16,7 +16,7 @@ var loadedTasks = []LoadedTask{
 
 func addToTasks() {
 	//246 is max without socket
-	for i := 1; i < 5; i++ {
+	for i := 1; i < 1; i++ {
 		loadedTasks = append(loadedTasks, LoadedTask{
 			Sku: "B75571",
 			Profile: "2324",

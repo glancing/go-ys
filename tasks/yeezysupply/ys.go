@@ -83,7 +83,7 @@ func loadYsConfig(task *bot.Task, internal *bot.TaskInternal) string {
 
 	fmt.Println("loaded config")
 
-	return "finished"
+	return "loadHome"
 }
 
 func loadHome(task *bot.Task, internal *bot.TaskInternal) string {

@@ -48,9 +48,7 @@ func SetTaskTransport(proxyString string, task *bot.Task) {
 			ClientHelloID: &tls.HelloChrome_92,
 			DisableCompression: false,
 			ForceAttemptHTTP2: true,
-			TLSClientConfig: &tls.Config{
-				InsecureSkipVerify: true,
-			},
+			TLSClientConfig: &tls.Config{},
 		}
 	
 		if clientProxy != nil {
