@@ -7,7 +7,6 @@ import (
 	"net/url"
 	"strings"
 	"time"
-	"sync"
 	"github.com/DestroyerBots/httpclient/net/http"
 	"github.com/glancing/go-ys/bot"
 	"github.com/glancing/go-ys/reqClient"
@@ -17,8 +16,6 @@ import (
 
 //if you wnat to call function again, just call like this wherever u need it
 //loadYsConfig(task, internal)
-
-var poop sync.Mutex
 
 func PushYeezySupplyHandlers(task *bot.Task) {
 	task.Handlers["start"] = startYeezySupply
