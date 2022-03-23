@@ -40,8 +40,9 @@ func SetTaskTransport(proxyString string, task *bot.Task) {
 		if proxyString != "" {
 			proxy, err := url.Parse(proxyString)
 			if err != nil {
-				fmt.Println("err parsing proxy")
+				fmt.Println("err parsing proxy", err)
 			}
+			fmt.Println("using proxy")
 			clientProxy = proxy
 		}
 		transport := &http.Transport {

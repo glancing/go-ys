@@ -4,23 +4,20 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strings"
 	"sync"
 
 	"github.com/glancing/go-ys/bot"
 	"github.com/glancing/go-ys/loader"
+	"github.com/glancing/go-ys/tasks/utils"
 	"github.com/glancing/go-ys/tasks/yeezysupply"
 	"github.com/lithammer/shortuuid/v4"
 )
 
 var (
-	sku = "HQ6316"
 	tasksLoaded []loader.LoadedTask
 	proxiesLoaded []string
 	profilesLoaded = 0
 )
-
-
 
 func main() {
 	tasksLoaded = loader.ReturnLoadedTasks()
@@ -69,36 +66,12 @@ func listenForAnswer() string {
 	return scanner.Text()
 }
 
-func selectProxy(currProxyIndex int) (int, string) {
-	if currProxyIndex > len(proxiesLoaded) - 1 {
-		if len(proxiesLoaded) == 0 { 
-			return currProxyIndex, "" 
-		}
-		currProxyIndex = 0
-	}
-	proxyString := proxiesLoaded[currProxyIndex]
-	splitProxy := strings.Split(proxyString, ":")
-	var formattedProxy string
-	switch(len(splitProxy)) {
-		case 2:
-			formattedProxy = fmt.Sprintf("http://%s:%s", splitProxy[0], splitProxy[1])
-		case 4:
-			formattedProxy = fmt.Sprintf("http://%s:%s@%s:%s", splitProxy[2], splitProxy[3], splitProxy[0], splitProxy[1])
-		default:
-			formattedProxy = ""
-	}
-	return currProxyIndex, formattedProxy
-}
-
 func startTasks(loadedTasks []loader.LoadedTask) {
 	fmt.Println("starting tasks")
 	var wg sync.WaitGroup
-	currProxyIndex := 0
 	for _, t := range loadedTasks {
 		uuid := shortuuid.New()
-		proxyIndex, proxy := selectProxy(currProxyIndex)
-		currProxyIndex = proxyIndex
-		currProxyIndex++
+		proxy := utils.SelectProxy(proxiesLoaded)
 		fmt.Println("Starting task", uuid, proxy)
 		task := bot.AddTask(uuid, t, proxy, &wg)
 		tasks.PushYeezySupplyHandlers(task)

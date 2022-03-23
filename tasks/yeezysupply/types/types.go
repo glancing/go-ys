@@ -22,3 +22,8 @@ type PixelConfig struct {
 	PixelPostPath string
 }
 
+type UserAgentData struct {
+	ChUa string
+	ChPlatform string
+	UserAgent string
+}

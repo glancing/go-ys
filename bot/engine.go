@@ -20,6 +20,7 @@ type TaskInternal struct {
 	Config types.ApiYsConfig
 	PixelConfig types.PixelConfig
 	ParsedUrl *url.URL
+	UserAgentData types.UserAgentData
 }
 
 type TaskHandlers map[string]func(*Task, *TaskInternal)(string)
